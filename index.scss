@@ -1,0 +1,25 @@
+body {
+    box-sizing: border-box;
+    background-color: black;
+    color:white;
+    .row {
+        margin: 20px 10px;
+        overflow: auto;
+        height: 400px;
+        width: 100%;
+        ul {
+            white-space: nowrap;
+            list-style: none;
+            li {
+                display: inline-block;
+                text-align: center;
+
+                img {
+                    height: 300px;
+                    width: 200px;
+                    display: block;
+                }
+            }
+        }
+    }
+}

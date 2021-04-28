@@ -1,0 +1,30 @@
+body {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  background-color: black;
+  color: white;
+}
+
+body .row {
+  margin: 20px 10px;
+  overflow: auto;
+  height: 400px;
+  width: 100%;
+}
+
+body .row ul {
+  white-space: nowrap;
+  list-style: none;
+}
+
+body .row ul li {
+  display: inline-block;
+  text-align: center;
+}
+
+body .row ul li img {
+  height: 300px;
+  width: 200px;
+  display: block;
+}
+/*# sourceMappingURL=index.css.map */
