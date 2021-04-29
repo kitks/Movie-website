@@ -7,7 +7,7 @@ body {
 
 body .row {
   margin: 20px 10px;
-  overflow: auto;
+  overflow-x: auto;
   height: 400px;
   width: 100%;
 }
@@ -20,11 +20,13 @@ body .row ul {
 body .row ul li {
   display: inline-block;
   text-align: center;
+  width: 200px;
 }
 
 body .row ul li img {
   height: 300px;
   width: 200px;
   display: block;
+  text-align: center;
 }
 /*# sourceMappingURL=index.css.map */

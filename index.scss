@@ -4,20 +4,24 @@ body {
     color:white;
     .row {
         margin: 20px 10px;
-        overflow: auto;
+        overflow-x: auto;
         height: 400px;
         width: 100%;
         ul {
             white-space: nowrap;
             list-style: none;
+            display: inline-block;
             li {
-                display: inline-block;
+                // display: inline-block;
                 text-align: center;
+                width: 200px;
 
                 img {
                     height: 300px;
                     width: 200px;
                     display: block;
+                    text-align: center;
+                   
                 }
             }
         }
