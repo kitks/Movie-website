@@ -31,12 +31,17 @@ body .row {
   width: 100%;
 }
 
-body .row h4 {
+body .row .catagoryBanner {
+  position: absolute;
+}
+
+body .row .catagoryBanner h4 {
   margin-bottom: 20px;
   color: #ffd900;
 }
 
 body .row ul {
+  margin-top: 50px;
   white-space: nowrap;
   list-style: none;
   display: inline-block;
@@ -53,10 +58,20 @@ body .row ul li img {
   height: 300px;
   width: 200px;
   display: block;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 body .row ul li p {
   white-space: normal !important;
   overflow-wrap: break-word;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  text-align: center;
+  margin-top: 5px;
 }
 /*# sourceMappingURL=index.css.map */

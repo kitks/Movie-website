@@ -5,7 +5,7 @@ body {
 
     ::-webkit-scrollbar {
         width: 30px;
-        height:10px;
+        height: 10px;
     }
 
     ::-webkit-scrollbar-track {
@@ -14,11 +14,11 @@ body {
 
     ::-webkit-scrollbar-thumb {
         width: 30px;
-        background: rgb(48, 48, 48)
+        background: rgb(48, 48, 48);
     }
 
     ::-webkit-scrollbar-thumb:hover {
-        background: rgb(255, 187, 0)
+        background: rgb(255, 187, 0);
     }
 
     .row {
@@ -28,12 +28,17 @@ body {
         height: 450px;
         width: 100%;
 
-h4{
-    margin-bottom: 20px;
-    color:rgb(255, 217, 0);
-}
+        .catagoryBanner {
+
+        position: absolute;
+            h4 {
+                margin-bottom: 20px;
+                color: rgb(255, 217, 0);
+            }
+        }
 
         ul {
+            margin-top:50px;
             white-space: nowrap;
             list-style: none;
             display: inline-block;
@@ -47,10 +52,14 @@ h4{
                     height: 300px;
                     width: 200px;
                     display: block;
+                    user-select: none;
                 }
                 p {
                     white-space: normal !important;
                     overflow-wrap: break-word;
+                    user-select: none;
+                    text-align: center;
+                    margin-top: 5px;
                 }
             }
         }
