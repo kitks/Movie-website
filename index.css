@@ -74,4 +74,15 @@ body .row ul li p {
   text-align: center;
   margin-top: 5px;
 }
+
+body .row.genresResult {
+  overflow: hidden;
+  height: 100%;
+}
+
+body .row.genresResult ul {
+  margin-top: 50px;
+  white-space: normal;
+  list-style: none;
+}
 /*# sourceMappingURL=index.css.map */

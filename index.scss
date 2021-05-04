@@ -29,8 +29,7 @@ body {
         width: 100%;
 
         .catagoryBanner {
-
-        position: absolute;
+            position: absolute;
             h4 {
                 margin-bottom: 20px;
                 color: rgb(255, 217, 0);
@@ -38,7 +37,7 @@ body {
         }
 
         ul {
-            margin-top:50px;
+            margin-top: 50px;
             white-space: nowrap;
             list-style: none;
             display: inline-block;
@@ -62,6 +61,18 @@ body {
                     margin-top: 5px;
                 }
             }
+        }
+    }
+
+    .row.genresResult {
+        overflow: hidden;
+        height: 100%;
+
+        ul {
+            margin-top: 50px;
+            white-space: normal;
+            list-style: none;
+            // display: inline-block;
         }
     }
 }

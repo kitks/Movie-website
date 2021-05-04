@@ -2,13 +2,15 @@ let searchInput = document.getElementsByClassName("form-control me-2")[0]
 let searchBtn = document.getElementsByClassName("btn btn-outline-success my-2 my-sm-0")[0]
 
 let nowPlaying = document.getElementsByClassName("row nowPlaying")[0]
+let nowPlayingUl = nowPlaying.getElementsByTagName("ul")[0]
 let nowPlayingList = nowPlaying.getElementsByTagName("li")
 
 let upcoming = document.getElementsByClassName("row upcoming")[0]
 let upcomingList = upcoming.getElementsByTagName("li")
 
-let actionGenres = document.getElementsByClassName("dropdown-item action")[0]
+// let genresResult = document.getElementsByClassName("row genresResult")[0]
 
+let actionGenres = document.getElementsByClassName("dropdown-item action")[0]
 let dropdownMenu = document.getElementsByClassName("dropdown-menu")[0]
 let dropdownItem = document.getElementsByClassName("dropdown-item")
 
@@ -21,38 +23,6 @@ let api = {
 let apiImg = {
     url: "https://image.tmdb.org/t/p/w200"
 }
-
-
-// fetch(`${api.url}now_playing?${api.key}&language=en-US&page=1`)
-//     .then(response => {
-//         if (response.status !== 200) {
-//             return console.log(`Look like there was a problem, status code ${response.status}`)
-//         }
-//         return response.json()
-//     })
-//     .then(data => {
-//         return nowPlayingDisplay(data)
-//     })
-//     .catch(err => {
-//         console.log(`Fetch error: ${err}`)
-//     })
-
-// fetch(`${api.url}upcoming?${api.key}&language=en-US&page=1&region=CA`)
-//     .then(response => {
-//         if (response.status !== 200) {
-//             return console.log(`Look like there was a problem, status code ${response.status}`)
-//         }
-//         return response.json()
-//     })
-//     .then(data => {
-//         return upcomingDisplay(data)
-//         // console.log(`up coming`)
-//         // console.log(data)
-//     })
-//     .catch(err => {
-//         console.log(`Fetch error: ${err}`)
-//     })
-
 
 
 let urls = [
@@ -75,6 +45,91 @@ let initDisplay = () => {
 
 let genreListDisplay = (genre) => {
 
+    clickGenre = (e) => {
+        Promise.all(urls.map(url =>
+            fetch(url).then(resp => resp.json())
+        ))
+            .then(data => {
+                console.log(data[0])
+                console.log(data[1])
+
+                console.log(data[1].results[0].genre_ids)
+
+
+                nowPlayingUl.remove()
+                upcoming.remove()
+
+                // if (document.getElementsByClassName("row genresResult")[0]) {
+                //     document.getElementsByClassName("row genresResult")[0].remove()
+                // } else {
+                nowPlaying.className = (`row genresResult`)
+                let genresResult = document.getElementsByClassName("row genresResult")[0]
+                let ul = document.createElement("ul")
+                genresResult.appendChild(ul)
+                let title = document.getElementsByClassName("catagoryBanner")[0]
+                let h4 = title.getElementsByTagName("h4")[0]
+                console.log(h4)
+                let targetId = e.target.id
+                // let title = genresResult.getElementsByTagName("h4")[0]
+                h4.innerText = (e.target.innerText)
+                console.log(data[0].results.length)
+                console.log(data[0].results[0].genre_ids)
+                console.log(genresResult)
+
+                for (let i = 0; i < data[0].results.length; i++) {
+                    let li = document.createElement("li")
+                    li.className = "genreResultMovie"
+                    ul.appendChild(li)
+                    li.setAttribute("id", `${data[0].results[i].genre_ids}`)
+                    let img = document.createElement("img")
+                    img.setAttribute("src", (`${apiImg.url}${data[0].results[i].poster_path}`))
+                    li.appendChild(img)
+                    let p = document.createElement("p")
+                    p.innerHTML = (`${data[0].results[i].title}${data[0].results[i].genre_ids}`)
+                    li.appendChild(p)
+                }
+
+
+                for (let i = 0; i < data[1].results.length; i++) {
+                    let li = document.createElement("li")
+                    li.className = "genreResultMovie"
+                    ul.appendChild(li)
+                    li.setAttribute("id", `${data[1].results[i].genre_ids}`)
+                    let img = document.createElement("img")
+                    img.setAttribute("src", (`${apiImg.url}${data[1].results[i].poster_path}`))
+                    li.appendChild(img)
+                    let p = document.createElement("p")
+                    p.innerHTML = (`${data[1].results[i].title}${data[1].results[i].genre_ids}`)
+                    li.appendChild(p)
+                }
+
+    
+
+                for (i = 0; i < nowPlayingList.length; i++) {
+
+                    if (nowPlayingList[i].id.includes(targetId)) {
+                        nowPlayingList[i].style.display = ""
+
+                    } else if (!nowPlayingList[i].id.includes(targetId)) {
+                        nowPlayingList[i].style.display = "none"
+                    }
+                }
+
+                for (i = 0; i < upcomingList.length; i++) {
+
+                    if (upcomingList[i].id.includes(targetId)) {
+                        upcomingList[i].style.display = ""
+
+                    } else if (!upcomingList[i].id.includes(targetId)) {
+                        upcomingList[i].style.display = "none"
+                    }
+                }
+
+
+            })
+
+
+    }
     for (let i = 0; i < genre.genres.length; i++) {
 
         console.log(genre.genres[i])
@@ -86,59 +141,24 @@ let genreListDisplay = (genre) => {
         ul.appendChild(li)
         li.appendChild(a)
         a.innerText = (`${genre.genres[i].name}`)
-        let id = document.createAttribute("id")
-        id.value = (`${genre.genres[i].id}`)
-        a.setAttributeNode(id)
+
+        a.setAttribute("id", `${genre.genres[i].id}`)
+
         dropdownItem[i].addEventListener("click", clickGenre)
     }
-}
-
-clickGenre = (e) => {
-    //    if(nowPlayingList[0].className == "nowPlayingMovie noResult"){
-    //     nowPlayingList[0].remove()
-    //    }
-    initDisplay()
-    console.log(e.target.id)
-
-    let targetId = e.target.id
-    let title = nowPlaying.getElementsByTagName("h4")[0]
-    // console.log(title.textContent)
-    // console.log(title.innerText)
-    title.innerText = (e.target.innerText)
-    // let selectGenre = e.target.id
-    console.log(nowPlayingList[0].id)
-    console.log(upcomingList[0].id)
-
-    for (i = 0; i < nowPlayingList.length; i++) {
-
-        if (nowPlayingList[i].id.includes(targetId)) {
-            nowPlayingList[i].style.display = ""
-
-        } else if (!nowPlayingList[i].id.includes(targetId)) {
-            nowPlayingList[i].style.display = "none"
-        }
-    }
-
-    for (i = 0; i < upcomingList.length; i++) {
-
-        if (upcomingList[i].id.includes(targetId)) {
-            upcomingList[i].style.display = ""
-
-        } else if (!upcomingList[i].id.includes(targetId)) {
-            upcomingList[i].style.display = "none"
-        }
-    }
-
-    // if (nowPlayingList[0].style.display == "none") {
-    //     let li = document.createElement("li")
-    //     let ul = nowPlaying.getElementsByTagName("ul")[0]
-    //     li.className = "nowPlayingMovie noResult"
-    //     li.innerText = ("No result")
-    //     ul.prepend(li)
-    // }
 
 
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
