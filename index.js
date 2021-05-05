@@ -6,7 +6,9 @@ let nowPlayingUl = nowPlaying.getElementsByTagName("ul")[0]
 let nowPlayingList = nowPlaying.getElementsByTagName("li")
 
 let upcoming = document.getElementsByClassName("row upcoming")[0]
+let upcomingH4 = upcoming.getElementsByTagName("h4")[0]
 let upcomingList = upcoming.getElementsByTagName("li")
+
 
 // let genresResult = document.getElementsByClassName("row genresResult")[0]
 
@@ -43,6 +45,9 @@ let initDisplay = () => {
 
 }
 
+
+
+
 let genreListDisplay = (genre) => {
 
     clickGenre = (e) => {
@@ -56,54 +61,20 @@ let genreListDisplay = (genre) => {
                 console.log(data[1].results[0].genre_ids)
 
 
-                nowPlayingUl.remove()
-                upcoming.remove()
+                // nowPlayingUl.remove()
+                // upcoming.remove()
 
-                // if (document.getElementsByClassName("row genresResult")[0]) {
-                //     document.getElementsByClassName("row genresResult")[0].remove()
-                // } else {
-                nowPlaying.className = (`row genresResult`)
-                let genresResult = document.getElementsByClassName("row genresResult")[0]
-                let ul = document.createElement("ul")
-                genresResult.appendChild(ul)
+
                 let title = document.getElementsByClassName("catagoryBanner")[0]
                 let h4 = title.getElementsByTagName("h4")[0]
-                console.log(h4)
+
                 let targetId = e.target.id
-                // let title = genresResult.getElementsByTagName("h4")[0]
                 h4.innerText = (e.target.innerText)
-                console.log(data[0].results.length)
-                console.log(data[0].results[0].genre_ids)
-                console.log(genresResult)
+                nowPlaying.className = (`row genresResult`)
 
-                for (let i = 0; i < data[0].results.length; i++) {
-                    let li = document.createElement("li")
-                    li.className = "genreResultMovie"
-                    ul.appendChild(li)
-                    li.setAttribute("id", `${data[0].results[i].genre_ids}`)
-                    let img = document.createElement("img")
-                    img.setAttribute("src", (`${apiImg.url}${data[0].results[i].poster_path}`))
-                    li.appendChild(img)
-                    let p = document.createElement("p")
-                    p.innerHTML = (`${data[0].results[i].title}${data[0].results[i].genre_ids}`)
-                    li.appendChild(p)
+                for (i = 0; i < upcomingList.length; i++) {
+                    nowPlayingUl.appendChild(upcomingList[i])
                 }
-
-
-                for (let i = 0; i < data[1].results.length; i++) {
-                    let li = document.createElement("li")
-                    li.className = "genreResultMovie"
-                    ul.appendChild(li)
-                    li.setAttribute("id", `${data[1].results[i].genre_ids}`)
-                    let img = document.createElement("img")
-                    img.setAttribute("src", (`${apiImg.url}${data[1].results[i].poster_path}`))
-                    li.appendChild(img)
-                    let p = document.createElement("p")
-                    p.innerHTML = (`${data[1].results[i].title}${data[1].results[i].genre_ids}`)
-                    li.appendChild(p)
-                }
-
-    
 
                 for (i = 0; i < nowPlayingList.length; i++) {
 
@@ -128,7 +99,7 @@ let genreListDisplay = (genre) => {
 
             })
 
-
+        upcoming.remove()
     }
     for (let i = 0; i < genre.genres.length; i++) {
 

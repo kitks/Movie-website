@@ -21,6 +21,21 @@ body {
         background: rgb(255, 187, 0);
     }
 
+    .bg-light {
+        background-color: rgb(255, 217, 0) !important;
+    }
+
+    .navbar-brand {
+        font-weight: 800;
+        font-size: 20pt;
+        user-select: none;
+    }
+
+    .navbar-light .navbar-nav .nav-link {
+        font-weight: 800 !important;
+        margin-top: 6px;
+    }
+
     .row {
         margin: 30px 10px 20px;
         overflow-x: scroll;

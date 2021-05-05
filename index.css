@@ -23,6 +23,24 @@ body ::-webkit-scrollbar-thumb:hover {
   background: #ffbb00;
 }
 
+body .bg-light {
+  background-color: #ffd900 !important;
+}
+
+body .navbar-brand {
+  font-weight: 800;
+  font-size: 20pt;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+body .navbar-light .navbar-nav .nav-link {
+  font-weight: 800 !important;
+  margin-top: 6px;
+}
+
 body .row {
   margin: 30px 10px 20px;
   overflow-x: scroll;
