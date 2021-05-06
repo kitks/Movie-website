@@ -4,9 +4,29 @@ body {
   background-color: black;
 }
 
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #131313;
+}
+
+::-webkit-scrollbar-thumb {
+  width: 10px;
+  background: #443200;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ffbb00;
+  width: 10px;
+  height: 10px;
+}
+
 #infoWrap {
   height: 550px;
-  width: 1000px;
+  width: 1010px;
   background-color: grey;
   margin: 50px auto 0;
   position: relative;
@@ -29,14 +49,19 @@ body {
 
 #infoWrap #contentWrap {
   z-index: 1;
+  overflow-y: auto;
   height: 570px;
-  width: 670px;
-  background-color: #001127;
-  padding: 30px;
+  width: 680px;
+  background-color: #000d1d;
+  padding: 15px 30px;
 }
 
 #infoWrap #contentWrap a {
   text-decoration: none;
+}
+
+#infoWrap #contentWrap a .fa.fa-youtube-play {
+  margin: 15px 0 0;
 }
 
 #infoWrap #contentWrap #titleWrap {
@@ -45,6 +70,7 @@ body {
 
 #infoWrap #contentWrap #titleWrap h2 {
   margin-bottom: 0;
+  font-size: 30pt;
 }
 
 #infoWrap #contentWrap #titleWrap span {
@@ -60,21 +86,38 @@ body {
   content: "";
 }
 
+#infoWrap #contentWrap #genreWrap {
+  margin-bottom: 10px;
+}
+
+#infoWrap #contentWrap #genreWrap span {
+  color: #c2c2c2;
+  font-size: 10pt;
+}
+
+#infoWrap #contentWrap #genreWrap span::after {
+  content: ",\00A0";
+}
+
+#infoWrap #contentWrap #genreWrap span:last-of-type::after {
+  content: "";
+}
+
 #infoWrap #contentWrap #story {
   color: white;
-  font-size: 8pt;
-  margin-top: 20px;
-  height: 200px;
+  font-size: 10pt;
+  margin-top: 10px;
   overflow: auto;
 }
 
-#infoWrap #contentWrap #castWrap {
-  margin: 15px 0;
+#infoWrap #contentWrap #castWrap h6 {
+  margin-top: 0;
+  color: #c2c2c2;
 }
 
 #infoWrap #contentWrap #castWrap .cast {
   display: inline-block;
-  margin: 0  10px  0 0;
+  margin: 0 10px 0 0;
   width: 60px;
   vertical-align: top;
 }

@@ -147,14 +147,13 @@ let nowPlayingDisplay = (movie) => {
         let a = document.createElement("a")
         a.setAttribute("href", `./info.html?id=${movie.results[i].id}`)
         li.appendChild(a)
-        // let genre = document.createAttribute("id")
-        // genre.value = (`${movie.results[i].genre_ids}`)
-        li.setAttribute("genre", `${movie.results[i].genre_ids}`)
+
+        li.setAttribute("id", `${movie.results[i].genre_ids}`)
         let img = document.createElement("img")
         img.setAttribute("src", (`${apiImg.url}${movie.results[i].poster_path}`))
         a.appendChild(img)
         let p = document.createElement("p")
-        p.innerHTML = (`${movie.results[i].title}${movie.results[i].genre_ids}`)
+        p.innerHTML = (`${movie.results[i].title}`)
         a.appendChild(p)
     }
 }
@@ -172,9 +171,8 @@ let upcomingDisplay = (movie) => {
         let a = document.createElement("a")
         a.setAttribute("href", `./info.html?id=${movie.results[i].id}`)
         li.appendChild(a)
-        // let genre = document.createAttribute("id")
-        // genre.value = (`${movie.results[i].genre_ids}`)
-        li.setAttribute("genre", `${movie.results[i].genre_ids}`)
+
+        li.setAttribute("id", `${movie.results[i].genre_ids}`)
         let img = document.createElement("img")
         img.setAttribute("src", (`${apiImg.url}${movie.results[i].poster_path}`))
         a.appendChild(img)
@@ -182,11 +180,14 @@ let upcomingDisplay = (movie) => {
         p.innerHTML = (`${movie.results[i].title}`)
         a.appendChild(p)
     }
+    initPage()
 }
 
 
 
 
+let initPage = () => window.scrollTo(0,0)
+window.addEventListener("onload",initPage)
 initDisplay()
 
 

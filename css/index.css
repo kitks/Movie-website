@@ -33,7 +33,7 @@ body ::-webkit-scrollbar-track {
 
 body ::-webkit-scrollbar-thumb {
   width: 30px;
-  background: #303030;
+  background: #443200;
 }
 
 body ::-webkit-scrollbar-thumb:hover {

@@ -7,7 +7,8 @@ let meta = document.getElementById("meta")
 let lang = document.getElementById("lang")
 let playTime = document.getElementById("playTime")
 let releaseDate = document.getElementById("releaseDate")
-let trailerUrl = document.getElementById("trailerUrl")
+let genreWrap = document.getElementById("genreWrap")
+let genre = document.getElementById("genre")
 let story = document.getElementById("story")
 let castWrap = document.getElementById("castWrap")
 let movieId = window.location.href
@@ -58,11 +59,22 @@ let initInfoUl = (data) => {
         lang.innerText += (`${data[0].spoken_languages[lg].english_name}\xa0\xa0`)
     }
 
-
-
     playTime.innerText = (`${data[0].runtime} minutes`)
     releaseDate.innerText = (`${data[0].release_date}`)
-    trailerUrl.setAttribute("href", `https://www.youtube.com/watch?v=${data[2].results[0].key}`)
+
+    for (genres in data[0].genres) {
+        
+// ${data[0].genres[genres].name}
+        genreWrap.innerHTML += (`
+        
+        <span id="${data[0].genres[genres].name}">${data[0].genres[genres].name}</span>
+        `)
+    }
+
+
+
+    let iframe = contentWrap.getElementsByTagName("iframe")[0]
+    iframe.setAttribute("src", `https://www.youtube.com/embed/${data[2].results[0].key}`)
     story.getElementsByTagName("p")[0].innerText = (`${data[0].overview}`)
 
     console.log(data[1].cast[0])
@@ -75,7 +87,7 @@ let initInfoUl = (data) => {
         div.setAttribute("class", "cast")
         castWrap.appendChild(div)
         console.log(data[1].cast[i].name)
-       
+
         div.innerHTML = (`
         <a href="#">
         <img src="${apiImg.url}${data[1].cast[i].profile_path}">
@@ -94,22 +106,8 @@ let test = (data) => {
 
     console.log(`${apiImg.url}${data[1].cast[0].profile_path}`)
 
-
-//     for (let i = 0; i < 9; i++) {
-//         let cast = document.createElement("div")
-//         cast.setAttribute("class", "cast")
-
-//         castWrap.appendChild(cast)
-
-//         cast.innerHTML = (`
-// <a href="#"><img src=""></a>
-// <p></p>
-// <p>As </p>
-// `)
-
-//     }
 }
-// test()
+
 
 
 // window.addEventListener("load", initInfoUl)
