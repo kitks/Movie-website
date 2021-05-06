@@ -16,20 +16,20 @@ body {
 }
 
 #infoWrap #posterWrap {
-  height: 550px;
+  height: 570px;
   width: 380px;
 }
 
 #infoWrap #posterWrap img {
-  -o-object-fit: contain;
-     object-fit: contain;
-  height: 550px;
+  -o-object-fit: fill;
+     object-fit: fill;
+  height: 570px;
   width: 380px;
 }
 
 #infoWrap #contentWrap {
   z-index: 1;
-  height: 550px;
+  height: 570px;
   width: 670px;
   background-color: #001127;
   padding: 30px;
@@ -49,6 +49,7 @@ body {
 
 #infoWrap #contentWrap #titleWrap span {
   color: #727272;
+  font-size: 10pt;
 }
 
 #infoWrap #contentWrap #titleWrap span::after {
@@ -65,7 +66,6 @@ body {
   margin-top: 20px;
   height: 200px;
   overflow: auto;
-  padding: 5px;
 }
 
 #infoWrap #contentWrap #castWrap {

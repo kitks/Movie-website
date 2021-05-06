@@ -1,0 +1,18 @@
+.bg-light {
+  background-color: #ffd900 !important;
+}
+
+.navbar-brand {
+  font-weight: 600;
+  font-size: 18pt;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  font-weight: 600 !important;
+  margin-top: 5px;
+}
+/*# sourceMappingURL=nav.css.map */

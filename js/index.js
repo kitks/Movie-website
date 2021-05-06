@@ -73,7 +73,8 @@ let genreListDisplay = (genre) => {
                 nowPlaying.className = (`row genresResult`)
 
                 for (i = 0; i < upcomingList.length; i++) {
-                    nowPlayingUl.appendChild(upcomingList[i])
+                    nowPlayingUl.appendChild(upcomingList[0])
+
                 }
 
                 for (i = 0; i < nowPlayingList.length; i++) {
@@ -86,15 +87,15 @@ let genreListDisplay = (genre) => {
                     }
                 }
 
-                for (i = 0; i < upcomingList.length; i++) {
+                // for (i = 0; i < upcomingList.length; i++) {
 
-                    if (upcomingList[i].id.includes(targetId)) {
-                        upcomingList[i].style.display = ""
+                //     if (upcomingList[i].id.includes(targetId)) {
+                //         upcomingList[i].style.display = ""
 
-                    } else if (!upcomingList[i].id.includes(targetId)) {
-                        upcomingList[i].style.display = "none"
-                    }
-                }
+                //     } else if (!upcomingList[i].id.includes(targetId)) {
+                //         upcomingList[i].style.display = "none"
+                //     }
+                // }
 
 
             })
@@ -143,15 +144,18 @@ let nowPlayingDisplay = (movie) => {
         let li = document.createElement("li")
         li.className = "nowPlayingMovie"
         ul.appendChild(li)
-        let id = document.createAttribute("id")
-        id.value = (`${movie.results[i].genre_ids}`)
-        li.setAttributeNode(id)
+        let a = document.createElement("a")
+        a.setAttribute("href", `./info.html?id=${movie.results[i].id}`)
+        li.appendChild(a)
+        // let genre = document.createAttribute("id")
+        // genre.value = (`${movie.results[i].genre_ids}`)
+        li.setAttribute("genre", `${movie.results[i].genre_ids}`)
         let img = document.createElement("img")
         img.setAttribute("src", (`${apiImg.url}${movie.results[i].poster_path}`))
-        li.appendChild(img)
+        a.appendChild(img)
         let p = document.createElement("p")
         p.innerHTML = (`${movie.results[i].title}${movie.results[i].genre_ids}`)
-        li.appendChild(p)
+        a.appendChild(p)
     }
 }
 
@@ -165,15 +169,18 @@ let upcomingDisplay = (movie) => {
         let li = document.createElement("li")
         li.className = "upcomingMovie"
         ul.appendChild(li)
-        let id = document.createAttribute("id")
-        id.value = (`${movie.results[i].genre_ids}`)
-        li.setAttributeNode(id)
+        let a = document.createElement("a")
+        a.setAttribute("href", `./info.html?id=${movie.results[i].id}`)
+        li.appendChild(a)
+        // let genre = document.createAttribute("id")
+        // genre.value = (`${movie.results[i].genre_ids}`)
+        li.setAttribute("genre", `${movie.results[i].genre_ids}`)
         let img = document.createElement("img")
         img.setAttribute("src", (`${apiImg.url}${movie.results[i].poster_path}`))
-        li.appendChild(img)
+        a.appendChild(img)
         let p = document.createElement("p")
         p.innerHTML = (`${movie.results[i].title}`)
-        li.appendChild(p)
+        a.appendChild(p)
     }
 }
 

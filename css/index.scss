@@ -1,7 +1,9 @@
+@import 'nav';
+
 body {
     box-sizing: border-box;
     background-color: black;
-    color: white;
+    
 
     ::-webkit-scrollbar {
         width: 30px;
@@ -21,27 +23,14 @@ body {
         background: rgb(255, 187, 0);
     }
 
-    .bg-light {
-        background-color: rgb(255, 217, 0) !important;
-    }
 
-    .navbar-brand {
-        font-weight: 800;
-        font-size: 20pt;
-        user-select: none;
-    }
-
-    .navbar-light .navbar-nav .nav-link {
-        font-weight: 800 !important;
-        margin-top: 6px;
-    }
 
     .row {
         margin: 30px 10px 20px;
         overflow-x: scroll;
         overflow-y: hidden;
         height: 450px;
-        width: 100%;
+        // width: 100%;
 
         .catagoryBanner {
             position: absolute;
@@ -62,6 +51,11 @@ body {
                 width: 200px;
                 margin-right: 15px;
 
+                a {
+                    text-decoration: none;
+                    
+                }
+
                 img {
                     height: 300px;
                     width: 200px;
@@ -74,13 +68,14 @@ body {
                     user-select: none;
                     text-align: center;
                     margin-top: 5px;
+                    color: white;
                 }
             }
         }
     }
 
     .row.genresResult {
-        overflow: hidden;
+        overflow: auto;
         height: 100%;
 
         ul {
