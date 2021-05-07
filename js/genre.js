@@ -1,5 +1,3 @@
-
-
 let nowPlaying = document.getElementsByClassName("row nowPlaying")[0]
 let nowPlayingUl = nowPlaying.getElementsByTagName("ul")[0]
 let nowPlayingList = nowPlaying.getElementsByTagName("li")
@@ -8,14 +6,15 @@ let upcoming = document.getElementsByClassName("row upcoming")[0]
 let upcomingH4 = upcoming.getElementsByTagName("h4")[0]
 let upcomingList = upcoming.getElementsByTagName("li")
 
+
 let genreUrlId = window.location.href
 let genreId = parseInt(genreUrlId.split("=")[1])
 let genreName = genreUrlId.split("=")[2]
-// let genresResult = document.getElementsByClassName("row genresResult")[0]
 
 let actionGenres = document.getElementsByClassName("dropdown-item action")[0]
 let dropdownMenu = document.getElementsByClassName("dropdown-menu")[0]
 let dropdownItem = document.getElementsByClassName("dropdown-item")
+
 
 let api = {
     url: "https://api.themoviedb.org/3/movie/",
@@ -34,7 +33,9 @@ let urls = [
     (`https://api.themoviedb.org/3/genre/movie/list?${api.key}&language=en-US`)
 ]
 
+
 let initDisplay = () => {
+
     Promise.all(urls.map(url =>
         fetch(url).then(resp => resp.json())
     ))
@@ -42,34 +43,32 @@ let initDisplay = () => {
             nowPlayingDisplay(data[0])
             upcomingDisplay(data[1])
             genreListDisplay(data[2])
+            genrePageinit()
         })
 
 }
 
 
 
-
 let genreListDisplay = (genre) => {
 
+
+    // console.log(parseInt(genreId))
     clickGenre = (e) => {
         Promise.all(urls.map(url =>
             fetch(url).then(resp => resp.json())
         ))
             .then(data => {
-                console.log(data[0])
-                console.log(data[1])
 
-                console.log(data[1].results[0].genre_ids)
-
-
-                // nowPlayingUl.remove()
-                // upcoming.remove()
-
-
+                console.log(`test`)
+                console.log(data[2])
+                // console.log(data[1].results[0].genre_ids)
+                // console.log(genreUrlId)
                 let title = document.getElementsByClassName("catagoryBanner")[0]
                 let h4 = title.getElementsByTagName("h4")[0]
-                h4.innerText = (`${genreName}`)
-
+                let targetId = e.target.id
+                // h4.innerText = (e.target.innerText)
+                h4.innerText = (`test`)
                 nowPlaying.className = (`row genresResult`)
 
                 for (i = 0; i < upcomingList.length; i++) {
@@ -87,29 +86,23 @@ let genreListDisplay = (genre) => {
                     }
                 }
 
-                // for (i = 0; i < upcomingList.length; i++) {
-
-                //     if (upcomingList[i].id.includes(targetId)) {
-                //         upcomingList[i].style.display = ""
-
-                //     } else if (!upcomingList[i].id.includes(targetId)) {
-                //         upcomingList[i].style.display = "none"
-                //     }
-                // }
-
+               
 
             })
-
         upcoming.remove()
+        
     }
+
+
     for (let i = 0; i < genre.genres.length; i++) {
 
-        console.log(genre.genres[i])
+        // console.log(genre.genres[i])
 
         let ul = dropdownMenu
         let li = document.createElement("li")
         let a = document.createElement("a")
         a.className = (`dropdown-item ${genre.genres[i].id} ${genre.genres[i].name}`)
+       
         ul.appendChild(li)
         li.appendChild(a)
         a.innerText = (`${genre.genres[i].name}`)
@@ -121,18 +114,6 @@ let genreListDisplay = (genre) => {
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 let nowPlayingDisplay = (movie) => {
     console.log(movie)
@@ -179,29 +160,42 @@ let upcomingDisplay = (movie) => {
         let p = document.createElement("p")
         p.innerHTML = (`${movie.results[i].title}`)
         a.appendChild(p)
+        
     }
-    
+    for (i = 0; i < upcomingList.length; i++) {
+        nowPlayingUl.appendChild(upcomingList[0])
+
+    }
+    upcoming.remove()
+    nowPlaying.className = (`row genresResult`)
 }
 
 
 
 
-let initPage = () => window.scrollTo(0,0)
-window.addEventListener("onload",initPage)
 
+let genrePageinit = () => {
+    
+    console.log(genreName)
+    let title = document.getElementsByClassName("catagoryBanner")[0]
+    let h4 = title.getElementsByTagName("h4")[0]
+    h4.innerText = (`${genreName}`)
 
+    for (i = 0; i < upcomingList.length; i++) {
+        nowPlayingUl.appendChild(upcomingList[0])
+
+    }
+
+    for (i = 0; i < nowPlayingList.length; i++) {
+// 
+        if (nowPlayingList[i].id.includes(genreId)) {
+            nowPlayingList[i].style.display = ""
+
+        } else if (!nowPlayingList[i].id.includes(genreId) || nowPlayingList[i].id == null) {
+            nowPlayingList[i].style.display = "none"
+        }
+    }
+}
 
 initDisplay()
-initPage()
-
-
-
-
-
- // title: movie.results[0].poster_path
-    // title: movie.results[0].title
-    // title: movie.results[0].original_language
-    // title: movie.results[0].overview
-    // title: movie.results[0].release_date
-    // title: movie.results[0].vote_average
-    // title: movie.results[0].backdrop_path
+genrePageinit()

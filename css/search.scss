@@ -1,0 +1,11 @@
+.row.searchResult {
+    overflow: auto;
+    height: 100%;
+
+    ul {
+        margin-top: 50px;
+        white-space: normal;
+        list-style: none;
+        // display: inline-block;
+    }
+}
