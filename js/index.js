@@ -1,5 +1,4 @@
 
-
 let nowPlaying = document.getElementsByClassName("row nowPlaying")[0]
 let nowPlayingUl = nowPlaying.getElementsByTagName("ul")[0]
 let nowPlayingList = nowPlaying.getElementsByTagName("li")
@@ -13,9 +12,7 @@ let genreId = parseInt(genreUrlId.split("=")[1])
 let genreName = genreUrlId.split("=")[2]
 // let genresResult = document.getElementsByClassName("row genresResult")[0]
 
-let actionGenres = document.getElementsByClassName("dropdown-item action")[0]
-let dropdownMenu = document.getElementsByClassName("dropdown-menu")[0]
-let dropdownItem = document.getElementsByClassName("dropdown-item")
+
 
 let api = {
     url: "https://api.themoviedb.org/3/movie/",
@@ -41,95 +38,10 @@ let initDisplay = () => {
         .then(data => {
             nowPlayingDisplay(data[0])
             upcomingDisplay(data[1])
-            genreListDisplay(data[2])
+            // genreListDisplay(data[2])
         })
 
 }
-
-
-
-
-let genreListDisplay = (genre) => {
-
-    clickGenre = (e) => {
-        Promise.all(urls.map(url =>
-            fetch(url).then(resp => resp.json())
-        ))
-            .then(data => {
-                console.log(data[0])
-                console.log(data[1])
-
-                console.log(data[1].results[0].genre_ids)
-
-
-                // nowPlayingUl.remove()
-                // upcoming.remove()
-
-
-                let title = document.getElementsByClassName("catagoryBanner")[0]
-                let h4 = title.getElementsByTagName("h4")[0]
-                h4.innerText = (`${genreName}`)
-
-                nowPlaying.className = (`row genresResult`)
-
-                for (i = 0; i < upcomingList.length; i++) {
-                    nowPlayingUl.appendChild(upcomingList[0])
-
-                }
-
-                for (i = 0; i < nowPlayingList.length; i++) {
-
-                    if (nowPlayingList[i].id.includes(targetId)) {
-                        nowPlayingList[i].style.display = ""
-
-                    } else if (!nowPlayingList[i].id.includes(targetId)) {
-                        nowPlayingList[i].style.display = "none"
-                    }
-                }
-
-                // for (i = 0; i < upcomingList.length; i++) {
-
-                //     if (upcomingList[i].id.includes(targetId)) {
-                //         upcomingList[i].style.display = ""
-
-                //     } else if (!upcomingList[i].id.includes(targetId)) {
-                //         upcomingList[i].style.display = "none"
-                //     }
-                // }
-
-
-            })
-
-        upcoming.remove()
-    }
-    for (let i = 0; i < genre.genres.length; i++) {
-
-        console.log(genre.genres[i])
-
-        let ul = dropdownMenu
-        let li = document.createElement("li")
-        let a = document.createElement("a")
-        a.className = (`dropdown-item ${genre.genres[i].id} ${genre.genres[i].name}`)
-        ul.appendChild(li)
-        li.appendChild(a)
-        a.innerText = (`${genre.genres[i].name}`)
-        a.setAttribute("href", `./genre.html?id=${genre.genres[i].id}=${genre.genres[i].name}`)
-        a.setAttribute("id", `${genre.genres[i].id}`)
-
-        dropdownItem[i].addEventListener("click", clickGenre)
-    }
-
-
-}
-
-
-
-
-
-
-
-
-
 
 
 
@@ -180,28 +92,83 @@ let upcomingDisplay = (movie) => {
         p.innerHTML = (`${movie.results[i].title}`)
         a.appendChild(p)
     }
-    
+
 }
 
 
 
-
-let initPage = () => window.scrollTo(0,0)
-window.addEventListener("onload",initPage)
-
+let initPage = () => window.scrollTo(0, 0)
+window.addEventListener("load", initDisplay)
 
 
-initDisplay()
-initPage()
+// let genreListDisplay = (genre) => {
+
+//     clickGenre = (e) => {
+//         Promise.all(urls.map(url =>
+//             fetch(url).then(resp => resp.json())
+//         ))
+//             .then(data => {
+//                 console.log(data[0])
+//                 console.log(data[1])
+
+//                 console.log(data[1].results[0].genre_ids)
 
 
 
 
 
- // title: movie.results[0].poster_path
-    // title: movie.results[0].title
-    // title: movie.results[0].original_language
-    // title: movie.results[0].overview
-    // title: movie.results[0].release_date
-    // title: movie.results[0].vote_average
-    // title: movie.results[0].backdrop_path
+//                 let title = document.getElementsByClassName("catagoryBanner")[0]
+//                 let h4 = title.getElementsByTagName("h4")[0]
+//                 h4.innerText = (`${genreName}`)
+
+//                 nowPlaying.className = (`row genresResult`)
+
+//                 for (i = 0; i < upcomingList.length; i++) {
+//                     nowPlayingUl.appendChild(upcomingList[0])
+
+//                 }
+
+//                 for (i = 0; i < nowPlayingList.length; i++) {
+
+//                     if (nowPlayingList[i].id.includes(targetId)) {
+//                         nowPlayingList[i].style.display = ""
+
+//                     } else if (!nowPlayingList[i].id.includes(targetId)) {
+//                         nowPlayingList[i].style.display = "none"
+//                     }
+//                 }
+
+//                 // for (i = 0; i < upcomingList.length; i++) {
+
+//                 //     if (upcomingList[i].id.includes(targetId)) {
+//                 //         upcomingList[i].style.display = ""
+
+//                 //     } else if (!upcomingList[i].id.includes(targetId)) {
+//                 //         upcomingList[i].style.display = "none"
+//                 //     }
+//                 // }
+
+
+//             })
+
+//         upcoming.remove()
+//     }
+//     for (let i = 0; i < genre.genres.length; i++) {
+
+//         console.log(genre.genres[i])
+
+//         let ul = dropdownMenu
+//         let li = document.createElement("li")
+//         let a = document.createElement("a")
+//         a.className = (`dropdown-item ${genre.genres[i].id} ${genre.genres[i].name}`)
+//         ul.appendChild(li)
+//         li.appendChild(a)
+//         a.innerText = (`${genre.genres[i].name}`)
+//         a.setAttribute("href", `./genre.html?id=${genre.genres[i].id}=${genre.genres[i].name}`)
+//         a.setAttribute("id", `${genre.genres[i].id}`)
+
+//         dropdownItem[i].addEventListener("click", clickGenre)
+//     }
+
+
+// }

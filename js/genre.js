@@ -6,14 +6,9 @@ let upcoming = document.getElementsByClassName("row upcoming")[0]
 let upcomingH4 = upcoming.getElementsByTagName("h4")[0]
 let upcomingList = upcoming.getElementsByTagName("li")
 
-
 let genreUrlId = window.location.href
 let genreId = parseInt(genreUrlId.split("=")[1])
 let genreName = genreUrlId.split("=")[2]
-
-let actionGenres = document.getElementsByClassName("dropdown-item action")[0]
-let dropdownMenu = document.getElementsByClassName("dropdown-menu")[0]
-let dropdownItem = document.getElementsByClassName("dropdown-item")
 
 
 let api = {
@@ -42,77 +37,47 @@ let initDisplay = () => {
         .then(data => {
             nowPlayingDisplay(data[0])
             upcomingDisplay(data[1])
-            genreListDisplay(data[2])
+            // genreDisplay(data[2])
             genrePageinit()
         })
 
 }
 
 
+let genreDisplay = (e) => {
 
-let genreListDisplay = (genre) => {
+    Promise.all(urls.map(url =>
+        fetch(url).then(resp => resp.json())
+    ))
+        .then(data => {
 
+            console.log(`test`)
+            console.log(data[2])
+            // console.log(data[1].results[0].genre_ids)
+            // console.log(genreUrlId)
+            let title = document.getElementsByClassName("catagoryBanner")[0]
+            let h4 = title.getElementsByTagName("h4")[0]
+            let targetId = e.target.id
+            // h4.innerText = (e.target.innerText)
+            h4.innerText = (`test`)
+            nowPlaying.className = (`row genresResult`)
 
-    // console.log(parseInt(genreId))
-    clickGenre = (e) => {
-        Promise.all(urls.map(url =>
-            fetch(url).then(resp => resp.json())
-        ))
-            .then(data => {
+            for (i = 0; i < upcomingList.length; i++) {
+                nowPlayingUl.appendChild(upcomingList[0])
 
-                console.log(`test`)
-                console.log(data[2])
-                // console.log(data[1].results[0].genre_ids)
-                // console.log(genreUrlId)
-                let title = document.getElementsByClassName("catagoryBanner")[0]
-                let h4 = title.getElementsByTagName("h4")[0]
-                let targetId = e.target.id
-                // h4.innerText = (e.target.innerText)
-                h4.innerText = (`test`)
-                nowPlaying.className = (`row genresResult`)
+            }
 
-                for (i = 0; i < upcomingList.length; i++) {
-                    nowPlayingUl.appendChild(upcomingList[0])
+            for (i = 0; i < nowPlayingList.length; i++) {
 
+                if (nowPlayingList[i].id.includes(targetId)) {
+                    nowPlayingList[i].style.display = ""
+
+                } else if (!nowPlayingList[i].id.includes(targetId)) {
+                    nowPlayingList[i].style.display = "none"
                 }
-
-                for (i = 0; i < nowPlayingList.length; i++) {
-
-                    if (nowPlayingList[i].id.includes(targetId)) {
-                        nowPlayingList[i].style.display = ""
-
-                    } else if (!nowPlayingList[i].id.includes(targetId)) {
-                        nowPlayingList[i].style.display = "none"
-                    }
-                }
-
-               
-
-            })
-        upcoming.remove()
-        
-    }
-
-
-    for (let i = 0; i < genre.genres.length; i++) {
-
-        // console.log(genre.genres[i])
-
-        let ul = dropdownMenu
-        let li = document.createElement("li")
-        let a = document.createElement("a")
-        a.className = (`dropdown-item ${genre.genres[i].id} ${genre.genres[i].name}`)
-       
-        ul.appendChild(li)
-        li.appendChild(a)
-        a.innerText = (`${genre.genres[i].name}`)
-        a.setAttribute("href", `./genre.html?id=${genre.genres[i].id}=${genre.genres[i].name}`)
-        a.setAttribute("id", `${genre.genres[i].id}`)
-
-        dropdownItem[i].addEventListener("click", clickGenre)
-    }
-
-
+            }
+        })
+    upcoming.remove()
 }
 
 let nowPlayingDisplay = (movie) => {
@@ -160,7 +125,7 @@ let upcomingDisplay = (movie) => {
         let p = document.createElement("p")
         p.innerHTML = (`${movie.results[i].title}`)
         a.appendChild(p)
-        
+
     }
     for (i = 0; i < upcomingList.length; i++) {
         nowPlayingUl.appendChild(upcomingList[0])
@@ -171,15 +136,13 @@ let upcomingDisplay = (movie) => {
 }
 
 
-
-
-
 let genrePageinit = () => {
-    
+
     console.log(genreName)
     let title = document.getElementsByClassName("catagoryBanner")[0]
     let h4 = title.getElementsByTagName("h4")[0]
-    h4.innerText = (`${genreName}`)
+    // decodeURIComponent(genreName)
+    h4.innerText = (`${decodeURIComponent(genreName)}`)
 
     for (i = 0; i < upcomingList.length; i++) {
         nowPlayingUl.appendChild(upcomingList[0])
@@ -187,7 +150,7 @@ let genrePageinit = () => {
     }
 
     for (i = 0; i < nowPlayingList.length; i++) {
-// 
+        // 
         if (nowPlayingList[i].id.includes(genreId)) {
             nowPlayingList[i].style.display = ""
 
@@ -198,4 +161,3 @@ let genrePageinit = () => {
 }
 
 initDisplay()
-genrePageinit()

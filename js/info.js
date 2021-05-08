@@ -43,7 +43,7 @@ Promise.all(urls.map(url =>
         console.log(data)
         // console.log(data[2])
         initInfoUl(data)
-        test(data)
+        // test(data)
     })
 
 
@@ -63,8 +63,8 @@ let initInfoUl = (data) => {
     releaseDate.innerText = (`${data[0].release_date}`)
 
     for (genres in data[0].genres) {
-        
-// ${data[0].genres[genres].name}
+
+        // ${data[0].genres[genres].name}
         genreWrap.innerHTML += (`
         
         <span id="${data[0].genres[genres].name}">${data[0].genres[genres].name}</span>
@@ -74,13 +74,26 @@ let initInfoUl = (data) => {
 
 
     let iframe = contentWrap.getElementsByTagName("iframe")[0]
-    iframe.setAttribute("src", `https://www.youtube.com/embed/${data[2].results[0].key}`)
+
+    if (data[2].results.length == 0) {
+        iframe.style.display = "none"
+    } else {
+        iframe.setAttribute("src", `https://www.youtube.com/embed/${data[2].results[0].key}`)
+
+    }
+
     story.getElementsByTagName("p")[0].innerText = (`${data[0].overview}`)
 
-    console.log(data[1].cast[0])
-    console.log(data[1].cast[0].name)
-    console.log(data[1].cast[0].character)
-    console.log(data[1].cast[0].profile_path)
+
+
+
+    if (data[1].cast.length == 0) {
+
+        let noInfo = castWrap.getElementsByTagName("h6")[0]
+
+        noInfo.innerText = ("Cast information not available")
+        return
+    }
 
     for (let i = 0; i < 8; i++) {
         let div = document.createElement("div")
@@ -97,16 +110,19 @@ let initInfoUl = (data) => {
         `)
 
     }
-
-
-}
-
-
-let test = (data) => {
-
-    console.log(`${apiImg.url}${data[1].cast[0].profile_path}`)
+    console.log(data[1].cast[0])
+    console.log(data[1].cast[0].name)
+    console.log(data[1].cast[0].character)
+    console.log(data[1].cast[0].profile_path)
 
 }
+
+
+// let test = (data) => {
+
+//     console.log(`${apiImg.url}${data[1].cast[0].profile_path}`)
+
+// }
 
 
 

@@ -1,24 +1,20 @@
-let searchInput = document.getElementsByClassName("form-control me-2")[0]
-let searchBtn = document.getElementsByClassName("btn btn-outline-success my-2 my-sm-0")[0]
+
 let searchResult = document.getElementsByClassName("row searchResult")[0]
-// let searchBtn = document.getElementById("searchBtn")
 let searchUrl = window.location.href
 let searchQuery = searchUrl
 
-// a.setAttribute("href", `./info.html?id=${movie.results[i].id}`)
+let catagoryBanner = document.getElementsByClassName("catagoryBanner")[0]
+let searchResultTitle = catagoryBanner.getElementsByTagName("h4")[0]
 
 
 
 
 
-// let urls = [
-//     (`${api.url}search/movie?${api.key}&language=en-US&query=${searchInput.value}&page=1&include_adult=false`)
-//     (`${api.url}upcoming?${api.key}&language=en-US&page=1&region=CA`),
-//     (`https://api.themoviedb.org/3/genre/movie/list?${api.key}&language=en-US`)
-// ]
-
-let searchMoive = () => {
+let searchMoive = (searchData) => {
     // location.assign(`search.html?query=${searchInput.value}`)
+
+    console.log(searchData)
+
     let api = {
         url: "https://api.themoviedb.org/3/",
         key: "api_key=8ff5e2fbb1b643a55f0256bb89a8a192",
@@ -28,22 +24,27 @@ let searchMoive = () => {
 
     // searchUrl = (`${searchUrl}query=${searchInput.value}`)
     // console.log(location.search)
-    fetch(`${api.url}search/movie?${api.key}&language=en-US&query=${searchInput.value}&page=1&include_adult=false`)
+    fetch(`${api.url}search/movie?${api.key}&language=en-US&query=${searchData}&page=1&include_adult=false`)
         .then(resp => resp.json())
-        .then(data =>
-            displaySearch(data))
+        .then(data => {
+            console.log(data)
+            displaySearch(data)
+        })
 
 
 }
 
 let displaySearch = (movie) => {
+
+
+
     console.log(movie)
     console.log(window.history)
     let apiImg = {
         url: "https://image.tmdb.org/t/p/w200"
     }
+    searchResultTitle.innerHTML = (`${movie.results.length} Results for <span>"${searchData}"</span>`)
 
-    
     for (let i = 0; i < movie.results.length; i++) {
 
         let ul = searchResult.getElementsByTagName("ul")[0]
@@ -66,18 +67,31 @@ let displaySearch = (movie) => {
 
 
 
+// let saveData = () => {
 
-let saveQuery = () => {
-    // window.location.href = window.location.href + (`?query=${searchInput.value}`);
-    window.history.replaceState(null, null, `?query=${searchInput.value}`);
 
-    // window.history.pushState(`?query=${searchInput.value}`);
-    searchMoive();
-}
-// searchMoive();
-// window.addEventListener("DOMContentLoaded", searchMoive)
-searchBtn.addEventListener("click", saveQuery)
+//     const searchQueryData = searchInput.value
 
-window.onhashchange = function () {
-    window.history.back()
-}
+//     if (!searchQueryData == "") {
+//         localStorage.setItem("SEARCH", searchQueryData)
+//         window.open("./search.html", "_self");
+//     }else{
+//         return alert("Please enter keywords")
+//     }
+// }
+
+
+
+window.addEventListener("load", () => {
+
+    let search = localStorage.getItem("SEARCH")
+
+    console.log(search)
+    searchData = search
+
+
+    searchMoive(searchData)
+})
+
+
+// searchBtn.addEventListener("click", saveData)

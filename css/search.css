@@ -8,4 +8,12 @@
   white-space: normal;
   list-style: none;
 }
+
+.catagoryBanner h4 {
+  color: #c2c2c2;
+}
+
+.catagoryBanner h4 span {
+  font-weight: 900;
+}
 /*# sourceMappingURL=search.css.map */
