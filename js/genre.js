@@ -44,41 +44,43 @@ let initDisplay = () => {
 }
 
 
-let genreDisplay = (e) => {
+// let genreDisplay = (e) => {
 
-    Promise.all(urls.map(url =>
-        fetch(url).then(resp => resp.json())
-    ))
-        .then(data => {
+//     Promise.all(urls.map(url =>
+//         fetch(url).then(resp => resp.json())
+//     ))
+//         .then(data => {
 
-            console.log(`test`)
-            console.log(data[2])
-            // console.log(data[1].results[0].genre_ids)
-            // console.log(genreUrlId)
-            let title = document.getElementsByClassName("catagoryBanner")[0]
-            let h4 = title.getElementsByTagName("h4")[0]
-            let targetId = e.target.id
-            // h4.innerText = (e.target.innerText)
-            h4.innerText = (`test`)
-            nowPlaying.className = (`row genresResult`)
+//             console.log(`test`)
+//             console.log(data[2])
+//             // console.log(data[1].results[0].genre_ids)
+//             // console.log(genreUrlId)
+//             let title = document.getElementsByClassName("catagoryBanner")[0]
+//             let h4 = title.getElementsByTagName("h4")[0]
+//             let targetId = e.target.id
+            
+//             h4.innerText = (`test`)
+//             nowPlaying.className = (`row genresResult`)
 
-            for (i = 0; i < upcomingList.length; i++) {
-                nowPlayingUl.appendChild(upcomingList[0])
+//             for (i = 0; i < upcomingList.length; i++) {
+//                 nowPlayingUl.appendChild(upcomingList[0])
 
-            }
+//             }
 
-            for (i = 0; i < nowPlayingList.length; i++) {
+//             for (i = 0; i < nowPlayingList.length; i++) {
 
-                if (nowPlayingList[i].id.includes(targetId)) {
-                    nowPlayingList[i].style.display = ""
+//                 if (nowPlayingList[i].id.includes(targetId)) {
+//                     nowPlayingList[i].style.display = ""
+                    
 
-                } else if (!nowPlayingList[i].id.includes(targetId)) {
-                    nowPlayingList[i].style.display = "none"
-                }
-            }
-        })
-    upcoming.remove()
-}
+//                 } else if (!nowPlayingList[i].id.includes(targetId)) {
+//                     nowPlayingList[i].style.display = "none"
+//                 }
+//             }
+            
+//         })
+//     upcoming.remove()
+// }
 
 let nowPlayingDisplay = (movie) => {
     console.log(movie)
@@ -143,7 +145,8 @@ let genrePageinit = () => {
     let h4 = title.getElementsByTagName("h4")[0]
     // decodeURIComponent(genreName)
     h4.innerText = (`${decodeURIComponent(genreName)}`)
-
+    let ul = nowPlaying.getElementsByTagName("ul")[0]
+    
     for (i = 0; i < upcomingList.length; i++) {
         nowPlayingUl.appendChild(upcomingList[0])
 
@@ -153,11 +156,15 @@ let genrePageinit = () => {
         // 
         if (nowPlayingList[i].id.includes(genreId)) {
             nowPlayingList[i].style.display = ""
+            
+            
 
         } else if (!nowPlayingList[i].id.includes(genreId) || nowPlayingList[i].id == null) {
             nowPlayingList[i].style.display = "none"
         }
     }
+    // ul.style.display = ""
+    nowPlayingUl.style.display="inline"
 }
 
 initDisplay()

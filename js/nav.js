@@ -5,7 +5,8 @@ let searchBtn = document.getElementsByClassName("btn btn-outline-success my-2 my
 let dropdownMenu = document.getElementsByClassName("dropdown-menu")[0]
 let dropdownItem = document.getElementsByClassName("dropdown-item")
 
-
+let ticket = document.getElementsByClassName("nav-item")[1]
+let buyTicket = ticket.getElementsByTagName("a")[0]
 
 let initListDisplay = () => {
 
@@ -36,7 +37,7 @@ let initListDisplay = () => {
             // nowPlayingDisplay(data[0])
             // upcomingDisplay(data[1])
             genreListDisplay(data)
-            console.log(data.genres)
+            // console.log(data.genres)
         })
 
 }
@@ -45,7 +46,7 @@ let genreListDisplay = (data) => {
 
     for (let i = 0; i < data.genres.length; i++) {
 
-        console.log(data.genres[i])
+        // console.log(data.genres[i])
 
         let ul = dropdownMenu
         let li = document.createElement("li")
@@ -96,6 +97,9 @@ window.addEventListener("keypress", (e) => {
 })
 
 
+// buyTicket.addEventListener("click",()=>
+// localStorage.setItem("ticket", "clicked Ticket")
+// )
 
 
 

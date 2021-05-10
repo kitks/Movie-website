@@ -1,9 +1,8 @@
-@import 'nav';
+@import "nav";
 
 body {
     box-sizing: border-box;
     background-color: black;
-    
 
     ::-webkit-scrollbar {
         width: 30px;
@@ -23,8 +22,6 @@ body {
         background: rgb(255, 187, 0);
     }
 
-
-
     .row {
         margin: 30px 10px 20px;
         overflow-x: scroll;
@@ -42,18 +39,22 @@ body {
 
         ul {
             margin-top: 50px;
-            white-space: nowrap;
+            // white-space: nowrap;
+            flex-direction: row;
+            // float: left;
             list-style: none;
-            display: inline-block;
+            display: flex;
+            
             li {
+                white-space: normal;
                 vertical-align: top;
                 display: inline-block;
                 width: 200px;
                 margin-right: 15px;
+                position: relative;
 
                 a {
                     text-decoration: none;
-                    
                 }
 
                 img {
@@ -63,12 +64,39 @@ body {
                     user-select: none;
                 }
                 p {
-                    white-space: normal !important;
+                    // white-space: normal;
                     overflow-wrap: break-word;
                     user-select: none;
                     text-align: center;
                     margin-top: 5px;
                     color: white;
+                    user-select: none;
+                }
+
+                .ticketBtn {
+                    color: rgb(255, 217, 0);
+                    position: absolute;
+                    top: 75%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    margin: 0;
+                    display: none;
+                    background-color: black
+                }
+
+                .btn {
+                    width: 100px;
+                    height: 100px;
+                }
+            }
+
+            li:hover {
+                img {
+                    transform: scale(1.05);
+                }
+                .ticketBtn {
+ 
+                    display: inline-block;
                 }
             }
         }

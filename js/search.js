@@ -63,6 +63,10 @@ let displaySearch = (movie) => {
         p.innerHTML = (`${movie.results[i].title}`)
         a.appendChild(p)
     }
+
+    let ul = searchResult.getElementsByTagName("ul")[0]
+    ul.style.display="inline"
+
 }
 
 

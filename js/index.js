@@ -12,7 +12,7 @@ let genreId = parseInt(genreUrlId.split("=")[1])
 let genreName = genreUrlId.split("=")[2]
 // let genresResult = document.getElementsByClassName("row genresResult")[0]
 
-
+let buyTicketBtn = document.getElementsByClassName("ticketBtn")[0]
 
 let api = {
     url: "https://api.themoviedb.org/3/movie/",
@@ -66,7 +66,28 @@ let nowPlayingDisplay = (movie) => {
         a.appendChild(img)
         let p = document.createElement("p")
         p.innerHTML = (`${movie.results[i].title}`)
-        a.appendChild(p)
+        li.appendChild(p)
+
+        let ticketBtn = document.createElement("a")
+        ticketBtn.setAttribute("href", `./ticket.html?id=${movie.results[i].id}`)
+        ticketBtn.setAttribute("id", `${[i]}`)
+        ticketBtn.setAttribute("class", "ticketBtn")
+        ticketBtn.innerText = ("Buy ticket")
+        // let btn = document.createElement("p")
+
+        // btn.innerText = ("Buy ticket")
+        // ticketBtn.append(btn)
+
+        li.appendChild(ticketBtn)
+
+        ticketBtn.addEventListener("click", (e) => {
+
+            let ticketBtn = e.target.id
+                localStorage.setItem("ticket", ticketBtn)
+            console.log(ticketBtn)
+
+        })
+
     }
 }
 
@@ -99,5 +120,6 @@ let upcomingDisplay = (movie) => {
 
 let initPage = () => window.scrollTo(0, 0)
 window.addEventListener("load", initDisplay)
+
 
 

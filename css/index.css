@@ -58,16 +58,23 @@ body .row .catagoryBanner h4 {
 
 body .row ul {
   margin-top: 50px;
-  white-space: nowrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
   list-style: none;
-  display: inline-block;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 body .row ul li {
+  white-space: normal;
   vertical-align: top;
   display: inline-block;
   width: 200px;
   margin-right: 15px;
+  position: relative;
 }
 
 body .row ul li a {
@@ -85,7 +92,6 @@ body .row ul li img {
 }
 
 body .row ul li p {
-  white-space: normal !important;
   overflow-wrap: break-word;
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -94,6 +100,33 @@ body .row ul li p {
   text-align: center;
   margin-top: 5px;
   color: white;
+  user-select: none;
+}
+
+body .row ul li .ticketBtn {
+  color: #ffd900;
+  position: absolute;
+  top: 75%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  margin: 0;
+  display: none;
+  background-color: black;
+}
+
+body .row ul li .btn {
+  width: 100px;
+  height: 100px;
+}
+
+body .row ul li:hover img {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+}
+
+body .row ul li:hover .ticketBtn {
+  display: inline-block;
 }
 
 body .row.genresResult {
